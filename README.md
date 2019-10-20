@@ -1,2 +1,4 @@
 # ToDo
-To Do List App
+To do list works
+# Language
+javascipt, html, css
