@@ -3,17 +3,88 @@
   padding: 0;
 }
 body {
-  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 100%;
-  height: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 0px 300px;
+  background: url("../img/sean.jpg") no-repeat center center;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.line-through {
+  text-decoration: line-through;
 }
 .container {
-  background-color: #fff;
+  background-color: #f5f5f5;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.todoapp-title {
+.todo-title {
   width: 100%;
   font-size: 100px;
   font-weight: 100;
   text-align: center;
   color: rgba(175, 47, 47, 0.15);
+}
+.icon-refresh {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 50px;
+  color: #f5f5f5;
+}
+#date {
+  text-align: center;
+  color: #555;
+  font-size: 25px;
+}
+.content {
+  padding: 10px 30px;
+}
+#list {
+  list-style-type:none;
+}
+.item {
+  align-items: center;
+  justify-content: space-between;
+}
+.text {
+  color: #555;
+  font-size: 40px;
+}
+.icon-circle {
+  padding: 0px 15px;
+  font-size: 40px;
+}
+.icon-trash {
+  padding: 0px 10px;
+  font-size: 40px;
+}
+.add-item {
+ padding: 20px;
+}
+.plus-icon {
+  font-size: 50px;
+  padding: 0px 20px;
+}
+#input {
+  height: 50px;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid #f1f1f1;
+  outline: none;
+  padding: 0px 20px;
+  font-size: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.author {
+  color: #bfbfbf;
+  font-size: 10px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-align: center;
+  line-height: 1;
 }
