@@ -4,8 +4,10 @@
 }
 body {
   font-family: Helvetica, Arial, sans-serif;
-  padding: 0px 300px;
-  background: url("../img/sean.jpg") no-repeat center center;
+  padding: 10px 300px 0px 300px;
+  background-image: url("../img/sean.jpg");
+  background-attachment: fixed;
+  background-size: cover;
 }
 .flex-column {
   display: flex;
@@ -49,6 +51,7 @@ body {
   list-style-type:none;
 }
 .item {
+  padding: 5px 0px;
   align-items: center;
   justify-content: space-between;
 }
