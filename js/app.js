@@ -5,12 +5,14 @@ const list = document.getElementById("list");
 
 let listToDo = [];
 let id=0;
+
 const check = "fa-circle";
 const uncheck = "fa-check-circle";
 const lineThrough = "line-through";
 
 const options = { weekday: "long", day: "numeric", month: "short", year: "numeric"};
 const today = new Date();
+
 date.innerHTML = today.toLocaleDateString("en-US",options);
 
 const addToDo = (todo, id, done, trash) => {
@@ -26,32 +28,10 @@ const addToDo = (todo, id, done, trash) => {
   const position = "beforeend";
   list.insertAdjacentHTML(position, text);
 };
-const completeToDo = (element) => {
-  element.classList.toggle(check);
-  element.classList.toggle(uncheck);
-  element.parentNode.querySelector(".text").classList.toggle(lineThrough);
-  listToDo[element.id].done = listToDo[element.id].done ? false : true ;
-};
-
-const removeToDo = (element) => {
-  element.parentNode.parentNode.removeChild(element.parentNode);
-  listToDo[element.id].trash = true;
-};
-
-list.addEventListener("click", (event) => {
-  let element = event.target;
-  const elementJob = element.attributes.job.value;
-  if(elementJob == "complete"){
-    completeToDo(element);
-  }
-  else {
-    removeToDo(element);
-  }
-});
 document.addEventListener("keyup", (event) => {
-  if(event.keyCode == 13){
+  if (event.keyCode == 13) {
     const toDo = input.value;
-    if(toDo){
+    if (toDo) {
       addToDo(toDo, id, false, false);
       listToDo.push({
         name: toDo,
@@ -62,5 +42,25 @@ document.addEventListener("keyup", (event) => {
       input.value = "";
     }
     id++;
+  }
+});
+const completeToDo = (element) => {
+  element.classList.toggle(check);
+  element.classList.toggle(uncheck);
+  element.parentNode.querySelector(".text").classList.toggle(lineThrough);
+  listToDo[element.id].done = listToDo[element.id].done ? false : true ;
+};
+const removeToDo = (element) => {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+  listToDo[element.id].trash = true;
+};
+list.addEventListener("click", (event) => {
+  let element = event.target;
+  const elementJob = element.attributes.job.value;
+  if(elementJob == "complete"){
+    completeToDo(element);
+  }
+  else {
+    removeToDo(element);
   }
 });
