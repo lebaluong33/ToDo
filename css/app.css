@@ -15,7 +15,6 @@ body {
 }
 .flex-row {
   display: flex;
-  flex-direction: row;
 }
 .display-none {
   display: none;
@@ -96,7 +95,6 @@ body {
 }
 #list {
   list-style-type:none;
-  padding-right: 100px;
 }
 .item {
   align-items: center;
@@ -104,8 +102,6 @@ body {
   width: 100%;
 }
 .item-container {
-  justify-items: center;
-  align-items: center;
   padding: 10px 0px;
   width: 100%;
 }
@@ -120,8 +116,8 @@ body {
   background-color: #f5f5f5;
   border: 0;
   outline: 0;
-  width: 100%;
-  word-wrap: break-word;
+  flex-basis: auto;
+  flex-grow: 1;
 }
 .icon-circle {
   padding: 0px 15px;

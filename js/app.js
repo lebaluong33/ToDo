@@ -177,15 +177,13 @@ const onChangeToDo = (element) => {
   element.parentNode.classList.add("display-none");
   inputText.classList.remove("display-none");
   inputText.toggleAttribute("autofocus");
-  inputText.addEventListener("keyup", (event) => {
-    if (event.keyCode === 13) {
+  inputText.addEventListener("change", () => {
       const toDo = inputText.value;
       let id = inputText.attributes.id.value;
       listToDo[id].name = toDo;
       inputText.classList.add("display-none");
       element.innerHTML = toDo;
       element.parentNode.classList.remove("display-none");
-    }
   });
 };
 
