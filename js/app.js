@@ -19,6 +19,7 @@ let categories = {
   completed: false
 };
 let toDoCompleted = 0;
+const enterKey = 13;
 
 const purpose = 
   {
@@ -40,7 +41,7 @@ const mainApp = () => {
 
   //get data, add to list
   input.addEventListener("keyup", (event) => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === enterKey) {
       const toDo = input.value;
       id = listToDo.length;
       if (toDo) {
@@ -151,7 +152,7 @@ const addToDo = (toDo, id, done) => {
                   <i class="fas fa-trash-alt delete icon-trash" job="delete" id="${id}"></i>
                 </div>
                 <input type="text" class="change-text display-none" id="${id}" value="${toDo}">
-            </li> ` ;
+              </li> ` ;
   const position = "beforeend";
   list.insertAdjacentHTML(position, text);
 };
@@ -177,15 +178,13 @@ const onChangeToDo = (element) => {
   element.parentNode.classList.add("display-none");
   inputText.classList.remove("display-none");
   inputText.toggleAttribute("autofocus");
-  inputText.addEventListener("keyup", (event) => {
-    if (event.keyCode === 13) {
+  inputText.addEventListener("change", () => {
       const toDo = inputText.value;
       let id = inputText.attributes.id.value;
       listToDo[id].name = toDo;
       inputText.classList.add("display-none");
       element.innerHTML = toDo;
       element.parentNode.classList.remove("display-none");
-    }
   });
 };
 
