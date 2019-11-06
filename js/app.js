@@ -157,14 +157,14 @@ const addToDo = (toDo, id, done) => {
   list.insertAdjacentHTML(position, text);
 };
 
-const completeToDo = (element) => {
+const completeToDo = (element = {}) => {
   element.classList.toggle(check);
   element.classList.toggle(uncheck);
   element.parentNode.parentNode.querySelector(".text").classList.toggle(lineThrough);
   listToDo[element.id].done = listToDo[element.id].done ? false : true;
 };
 
-const removeToDo = (element) => {
+const removeToDo = (element = {}) => {
   element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
   listToDo.splice(element.id, 1);
   showItemLeft(listToDo.length);
@@ -173,7 +173,7 @@ const removeToDo = (element) => {
   render(categoryStatus);
 };
 
-const onChangeToDo = (element) => {
+const onChangeToDo = (element = {}) => {
   const inputText = element.parentNode.parentNode.lastElementChild;
   element.parentNode.classList.add("display-none");
   inputText.classList.remove("display-none");
@@ -189,7 +189,7 @@ const onChangeToDo = (element) => {
 };
 
 
-const removeAllChild = (myNode) => {
+const removeAllChild = (myNode ={}) => {
   while (myNode.firstChild) {
     myNode.removeChild(myNode.firstChild);
   }
