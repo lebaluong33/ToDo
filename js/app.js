@@ -28,9 +28,6 @@ const purpose =
     completed: "completed",
     clearCompleted: "clear-Completed"
   };
-const check = "fa-check-circle";
-const uncheck = "fa-circle";
-const lineThrough = "line-through";
 
 const options = { weekday: "long", day: "numeric", month: "short", year: "numeric"};
 const today = new Date();
@@ -49,7 +46,7 @@ const mainApp = () => {
         listToDo.push({
           name: toDo,
           id: id,
-          done: false
+          isCompleted: false
         });
         isClearCompleted.classList.remove("display-none");
         showItemLeft(listToDo.length);
@@ -141,9 +138,9 @@ const mainApp = () => {
 
 }
 
-const addToDo = (toDo, id, done) => {
-  const finish = done ? check : uncheck;
-  const textDecoration = done ? lineThrough : "";
+const addToDo = (toDo, id, isCompleted) => {
+  const finish = isCompleted ? check : uncheck;
+  const textDecoration = isCompleted ? lineThrough : "";
   const text = `
               <li class="item-container flex-column">
                 <div class="item flex-row" id="view">  
@@ -157,14 +154,14 @@ const addToDo = (toDo, id, done) => {
   list.insertAdjacentHTML(position, text);
 };
 
-const completeToDo = (element = {}) => {
+const completeToDo = (element) => {
   element.classList.toggle(check);
   element.classList.toggle(uncheck);
   element.parentNode.parentNode.querySelector(".text").classList.toggle(lineThrough);
-  listToDo[element.id].done = listToDo[element.id].done ? false : true;
+  listToDo[element.id].isCompleted = listToDo[element.id].isCompleted ? false : true;
 };
 
-const removeToDo = (element = {}) => {
+const removeToDo = (element) => {
   element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
   listToDo.splice(element.id, 1);
   showItemLeft(listToDo.length);
@@ -173,7 +170,7 @@ const removeToDo = (element = {}) => {
   render(categoryStatus);
 };
 
-const onChangeToDo = (element = {}) => {
+const onChangeToDo = (element) => {
   const inputText = element.parentNode.parentNode.lastElementChild;
   element.parentNode.classList.add("display-none");
   inputText.classList.remove("display-none");
@@ -189,7 +186,7 @@ const onChangeToDo = (element = {}) => {
 };
 
 
-const removeAllChild = (myNode ={}) => {
+const removeAllChild = (myNode) => {
   while (myNode.firstChild) {
     myNode.removeChild(myNode.firstChild);
   }
@@ -199,7 +196,7 @@ const renderSelectAll = () => {
   removeAllChild(list);
   listToDo.map((item) => {
     addToDo(item.name, item.id, isSelectAll);
-    item.done = isSelectAll;
+    item.isCompleted = isSelectAll;
   });
 };
 
@@ -209,16 +206,16 @@ const render = (feature) => {
     let check;
     switch(feature){
       case purpose.actived: 
-        check = !item.done;
+        check = !item.isCompleted;
         break;
       case purpose.completed: 
-        check = item.done;
+        check = item.isCompleted;
         break;
       default: 
         check = true;
         break;
     }
-    if (check) addToDo(item.name, item.id, item.done);
+    if (check) addToDo(item.name, item.id, item.isCompleted);
   });
   completedCounter();
   let status = (feature === purpose.all || feature === purpose.clearCompleted) ? 
@@ -237,13 +234,13 @@ const refreshList = () => {
 };
 
 const completedCounter = () => {
-  let done = listToDo.filter(toDos => toDos.done === true);
-  toDoCompleted = done.length;
+  let isCompleted = listToDo.filter(toDos => toDos.isCompleted === true);
+  toDoCompleted = isCompleted.length;
 };
 
 const clearCompleted = () => {
-  let done = listToDo.filter(toDos => toDos.done === false);
-  listToDo = done;
+  let isCompleted = listToDo.filter(toDos => toDos.isCompleted === false);
+  listToDo = isCompleted;
 };
 
 const showItemLeft = (number) => {

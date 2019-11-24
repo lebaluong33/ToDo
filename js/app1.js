@@ -11,7 +11,7 @@ const itemLeft = document.getElementById("item-left");
 const isClearCompleted = document.getElementById("clear-completed");
 
 let listToDo = [];
-let id=0;
+let id = 0;
 let isSelectAll = false;
 let categories = {
   all: true,
@@ -21,19 +21,20 @@ let categories = {
 let toDoCompleted = 0;
 const enterKey = 13;
 
-const purpose = 
-  {
-    all:"all",
-    actived: "actived",
-    completed: "completed",
-    clearCompleted: "clear-Completed"
-  };
+const purpose =
+{
+  all: "all",
+  actived: "actived",
+  completed: "completed",
+  clearCompleted: "clear-Completed"
+};
 const check = "fa-check-circle";
 const uncheck = "fa-circle";
 const lineThrough = "line-through";
 
-const options = { weekday: "long", day: "numeric", month: "short", year: "numeric"};
+const options = { weekday: "long", day: "numeric", month: "short", year: "numeric" };
 const today = new Date();
+date.innerHTML = today.toLocaleDateString("en-US", options);
 
 const mainApp = () => {
   //add date
@@ -59,7 +60,7 @@ const mainApp = () => {
   });
 
   //listen categories event 
-  all.addEventListener("click", () =>{
+  all.addEventListener("click", () => {
     if (!categories.all) {
       render(purpose.all);
     }
@@ -71,7 +72,7 @@ const mainApp = () => {
     categories = choiceCategory;
   });
   actived.addEventListener("click", () => {
-    if(!categories.actived) {
+    if (!categories.actived) {
       render(purpose.actived);
     }
     let choiceCategory = {
@@ -82,7 +83,7 @@ const mainApp = () => {
     categories = choiceCategory;
   });
   completed.addEventListener("click", () => {
-    if(!categories.completed) {
+    if (!categories.completed) {
       render(purpose.completed);
     }
     let choiceCategory = {
@@ -157,14 +158,8 @@ const addToDo = (toDo, id, done) => {
   list.insertAdjacentHTML(position, text);
 };
 
-const completeToDo = (element = {}) => {
-  element.classList.toggle(check);
-  element.classList.toggle(uncheck);
-  element.parentNode.parentNode.querySelector(".text").classList.toggle(lineThrough);
-  listToDo[element.id].done = listToDo[element.id].done ? false : true;
-};
 
-const removeToDo = (element = {}) => {
+const removeToDo = (element) => {
   element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode);
   listToDo.splice(element.id, 1);
   showItemLeft(listToDo.length);
@@ -173,18 +168,18 @@ const removeToDo = (element = {}) => {
   render(categoryStatus);
 };
 
-const onChangeToDo = (element = {}) => {
+const onChangeToDo = (element) => {
   const inputText = element.parentNode.parentNode.lastElementChild;
   element.parentNode.classList.add("display-none");
   inputText.classList.remove("display-none");
   inputText.toggleAttribute("autofocus");
   inputText.addEventListener("change", () => {
-      const toDo = inputText.value;
-      let id = inputText.attributes.id.value;
-      listToDo[id].name = toDo;
-      inputText.classList.add("display-none");
-      element.innerHTML = toDo;
-      element.parentNode.classList.remove("display-none");
+    const toDo = inputText.value;
+    let id = inputText.attributes.id.value;
+    listToDo[id].name = toDo;
+    inputText.classList.add("display-none");
+    element.innerHTML = toDo;
+    element.parentNode.classList.remove("display-none");
   });
 };
 
@@ -207,25 +202,25 @@ const render = (feature) => {
   removeAllChild(list);
   listToDo.map((item) => {
     let check;
-    switch(feature){
-      case purpose.actived: 
+    switch (feature) {
+      case purpose.actived:
         check = !item.done;
         break;
-      case purpose.completed: 
+      case purpose.completed:
         check = item.done;
         break;
-      default: 
+      default:
         check = true;
         break;
     }
     if (check) addToDo(item.name, item.id, item.done);
   });
   completedCounter();
-  let status = (feature === purpose.all || feature === purpose.clearCompleted) ? 
-  listToDo.length : 
-  feature === purpose.actived ?
-  listToDo.length - toDoCompleted :
-  toDoCompleted;
+  let status = (feature === purpose.all || feature === purpose.clearCompleted) ?
+    listToDo.length :
+    feature === purpose.actived ?
+      listToDo.length - toDoCompleted :
+      toDoCompleted;
   showItemLeft(status);
   if (listToDo.length === 0) isClearCompleted.classList.add("display-none");
 };
@@ -246,9 +241,6 @@ const clearCompleted = () => {
   listToDo = done;
 };
 
-const showItemLeft = (number) => {
-  const text = (number != 0) ? `${number} ${number > 1 ? "items" : "item"} left` : "";
-  itemLeft.innerHTML = text;
-};
+
 
 mainApp();
